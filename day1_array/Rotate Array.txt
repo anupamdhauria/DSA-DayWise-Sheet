@@ -1,0 +1,55 @@
+Q>Given an integer array nums, rotate the array to the right by k steps, 
+where k is non-negative.
+
+ 
+Example 1:
+
+Input: nums = [1,2,3,4,5,6,7], k = 3
+Output: [5,6,7,1,2,3,4]
+Explanation:
+rotate 1 steps to the right: [7,1,2,3,4,5,6]
+rotate 2 steps to the right: [6,7,1,2,3,4,5]
+rotate 3 steps to the right: [5,6,7,1,2,3,4]
+
+
+solution
+================
+Intuition : The algorithm works as follows:
+-> Reverse the whole array combined.
+-> Break the array in two parts by removing k elements from the back.
+-> After that reverse both parts of the array separately.
+
+
+Approach
+Complexity
+Time complexity: O(N*k)
+Space complexity :O(1) 
+
+
+Code :
+--------------
+
+
+class Solution {
+    private void reverse(int [] nums,int start,int end){
+
+        while(start<=end){
+            int temp=nums[start];
+            nums[start]=nums[end];
+            nums[end]=temp;
+            start++;
+            end--;
+        }
+        
+    }
+    public void rotate(int[] nums, int k) {
+        int n=nums.length-1;
+        //if k is larger than n so we need to mod that
+        k=k%(n+1);
+        //reverse the entire list
+       reverse(nums,0,n);
+
+       reverse(nums,0,k-1);
+       reverse(nums,k,n);
+    }
+}
